@@ -1,0 +1,10 @@
+{
+  "name": "graphql-hackernews",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.16.7",
+    "uuid": "^3.3.2"
+  }
+}
