@@ -1,0 +1,6 @@
+#endpoint: ''endpoint: https://us1.prisma.sh/joe-friesen-2baea5/graphql-hackernews/dev
+
+
+datamodel: datamodel.graphql
+
+secret: mysecret123
