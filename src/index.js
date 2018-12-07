@@ -9,7 +9,7 @@ let links = [
   },
   {
     "id": "2",
-    "url": "https://www.howtographql",
+    "url": "https://www.howtographql.com",
     "description": "a webbed site"
   }
 ];
@@ -19,7 +19,10 @@ const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
     feed: () => links,
-    link: (args) => { return links.filter(link => link.id === args.id) }
+    link: (root, args) => {
+      const theLinkIAmLookingFor = links.find(link => link.id === args.id);
+      return theLinkIAmLookingFor;
+    }
   },
   Mutation: {
     post: (root, args) => {
@@ -32,10 +35,26 @@ const resolvers = {
       return link // return link as specified in schema Mutation.post(): Link!
     },
 
-    // updateLink: (root, args) => {
-    //
-    // }
-  },
+    updateLink: (root, args) => {
+      const newLink = {id: args.id, url: args.url, description: args.description};
+      links.forEach(link => {
+        if (link.id === newLink.id) {
+          link.id = args.id;
+          link.url = args.url;
+          link.description = args.description;
+        }
+      });
+      return newLink;
+    },
+
+    deleteLink: (root, args) => {
+      const badLinkIndex = links.findIndex(item => item.id === args.id);
+      const badLink = links[badLinkIndex];
+      links.splice(badLinkIndex,1);
+      console.log(links);
+      return badLink;
+    }
+  }
 }
 
 const server = new GraphQLServer({
