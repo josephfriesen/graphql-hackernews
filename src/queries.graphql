@@ -1,0 +1,12 @@
+# Feed
+
+query {
+  feed {
+    id
+    url
+    description
+    postedBy {
+      name
+    }
+  }
+}
